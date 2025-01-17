@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Support\Facades\Storage;
+
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -76,5 +78,25 @@ class BookController extends Controller
         ]);
 
         return redirect()->route('books.index')->with(['success' => 'Successfully Added New Book!']);
+    }
+
+    /**
+     * destroy
+     * 
+     * @param mixed $id
+     * @return RedirectResponse
+     */
+    public function destroy($id): RedirectResponse
+    {
+        // get book by id
+        $book = Book::findOrFail($id);
+
+        // delete image at storage
+        Storage::delete('public/books/' . $book->cover);
+
+        // delete data book
+        $book->delete();
+
+        return redirect()->route('books.index')->with(['success' => 'Successfully Deleted Book!']);
     }
 }
