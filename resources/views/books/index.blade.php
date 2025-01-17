@@ -3,11 +3,12 @@
 @section('title', 'Book Lists')
 
 @section('content')
-<div class="container pt-4">
+<div class="container py-4">
     <div class="row mb-2">
         <div class="col-12">
-            <header>
+            <header class="d-flex justify-content-between align-items-center">
                 <h2 class="display-6">Book Lists</h3>
+                    <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a>
             </header>
         </div>
     </div>
@@ -19,7 +20,6 @@
                         <th scope="col">#</th>
                         <th scope="col">Title</th>
                         <th scope="col">Author</th>
-                        <th scope="col">Image</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +28,6 @@
                         <th scope="row">{{ $i+1 }}</th>
                         <td>{{ $book->title }}</td>
                         <td>{{ $book->author }}</td>
-                        <td>{{ $book->image }}</td>
                     </tr>
                     @empty
                     <div class="alert alert-danger" role="alert">
