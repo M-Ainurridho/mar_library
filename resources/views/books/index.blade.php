@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                     @forelse ($books as $i => $book)
-                    <tr onclick="onClickBtn('{{$book->id}}')">
+                    <tr onclick="handleClick('{{ $book->id }}')">
                         <th scope="row">{{ $i+1 }}</th>
                         <td>{{ $book->title }}</td>
                         <td>{{ $book->author }}</td>
