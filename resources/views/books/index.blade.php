@@ -17,7 +17,7 @@
             <table class="table table-striped-columns">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Title</th>
                         <th scope="col">Author</th>
                         <th scope="col">Action</th>
@@ -26,7 +26,7 @@
                 <tbody>
                     @forelse ($books as $i => $book)
                     <tr>
-                        <th scope="row">{{ $i+1 }}</th>
+                        <th scope="row">{{ $book->id }}</th>
                         <td>{{ $book->title }}</td>
                         <td>{{ $book->author }}</td>
                         <td>
