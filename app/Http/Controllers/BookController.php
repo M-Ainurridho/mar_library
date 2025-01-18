@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -81,12 +82,71 @@ class BookController extends Controller
     }
 
     /**
+     * edit
+     * 
+     * @param mixed $id
+     * @return View
+     */
+    public function edit(string $id): View
+    {
+        // get book by id
+        $book = Book::findOrFail($id);
+
+        return view('books.edit', compact('book'));
+    }
+
+    /**
+     * update
+     * 
+     * @param mixed $request
+     * @param mixed $id
+     * @return RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        // validation form
+        $request->validate([
+            'title'     => 'required|min:3',
+            'author'    => 'required|min:3',
+            'cover'     => 'image|mimes:jpg,jpeg,png|max:2048'
+        ]);
+
+        // get book by id
+        $book = Book::findOrFail($id);
+
+        // check if cover is uploaded
+        if ($request->hasFile('cover')) {
+            // upload new cover
+            $image = $request->file('cover');
+            $image->storeAs('public/books', $image->hashName());
+
+            // delete old cover
+            Storage::delete('public/books/' . $book->cover);
+
+            // update book with new cover
+            $book->update([
+                'title'     => $request->title,
+                'author'    => $request->author,
+                'cover'     => $image->hashName()
+            ]);
+        } else {
+            // update book without cover
+            $book->update([
+                'title'     => $request->title,
+                'author'    => $request->author,
+            ]);
+        }
+
+        return redirect()->route('books.index')->with(['success' => 'Successfully Updated Book!']);
+    }
+
+    /**
      * destroy
      * 
      * @param mixed $id
      * @return RedirectResponse
      */
-    public function destroy($id): RedirectResponse
+    public function destroy(string $id): RedirectResponse
     {
         // get book by id
         $book = Book::findOrFail($id);
