@@ -10,45 +10,27 @@
         <div class="row mb-2">
             <div class="col-12">
                 <header class="d-flex justify-content-between align-items-center">
-                    <h4>Newest Books</h4>
+                    <h4>Latest Books</h4>
                     <a href="" class="text-decoration-none fs-6">Lihat semua</a>
                 </header>
             </div>
         </div>
 
         <div class="row">
+            @foreach ($latestBooks as $book)
             <div class="col-sm-2 col-md-3">
-                <div class="card">
-                    <img src="{{ asset('book1.jpeg') }}" class="card-img-top" alt="book1" style="aspect-ratio: 1/1;">
+                <a href="{{ route('books.show', $book->id) }}" class="card text-decoration-none">
+                    <img
+                        src="{{ Storage::url('books/' . $book->cover) }}"
+                        class="card-img-top"
+                        alt="{{ $book->title }}"
+                        style="aspect-ratio: 1/1; object-fit: fit;">
                     <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                        <p class="card-text">{{ $book->title }}</p>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="col-sm-2 col-md-3">
-                <div class="card">
-                    <img src="{{ asset('book1.jpeg') }}" class="card-img-top" alt="book1" style="aspect-ratio: 1/1;">
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 col-md-3">
-                <div class="card">
-                    <img src="{{ asset('book1.jpeg') }}" class="card-img-top" alt="book1" style="aspect-ratio: 1/1;">
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2 col-md-3">
-                <div class="card">
-                    <img src="{{ asset('book1.jpeg') }}" class="card-img-top" alt="book1" style="aspect-ratio: 1/1;">
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 </div>
