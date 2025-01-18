@@ -44,7 +44,7 @@
 
 @section('js')
 <script>
-    function onClickBtn(id) {
+    function handleClick(id) {
         window.location.href = `/books/${id}`
     }
 </script>
