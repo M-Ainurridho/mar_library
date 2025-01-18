@@ -21,7 +21,7 @@ class BookController extends Controller
     public function index(): View
     {
         // get all books
-        $books = Book::all();
+        $books = Book::orderByDesc('updated_at')->paginate(10);
 
         // render view with all books
         return view('books.index', compact('books'));
