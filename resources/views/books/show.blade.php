@@ -13,8 +13,8 @@
     </div>
 
     <div class="row">
-        <div class="col-8">
-            <div class="card" style="width: 18rem;">
+        <div class="col-4">
+            <div class="card">
                 <img src="{{ Storage::url('books/' . $book->cover) }}" class="card-img-top" alt="{{ $book->cover }}" style="aspect-ratio:1/1;" />
                 <div class="card-body">
                     <h5 class="card-title">{{ $book->title }}</h5>
