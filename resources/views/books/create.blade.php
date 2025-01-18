@@ -21,7 +21,7 @@
                         <span>Title</span>
                         <span class="text-danger">*</span>
                     </label>
-                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title">
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ @old('title') }}">
                     @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -33,7 +33,7 @@
                         <span>Author</span>
                         <span class="text-danger">*</span>
                     </label>
-                    <input type="text" name="author" class="form-control @error('author') is-invalid @enderror" id="author">
+                    <input type="text" name="author" class="form-control @error('author') is-invalid @enderror" id="author" value="{{ @old('author') }}">
                     @error('author')
                     <div class="invalid-feedback">
                         {{ $message }}
